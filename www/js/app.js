@@ -6,7 +6,7 @@
 // 'starter.controllers' is found in controllers.js
 angular.module('starter', ['ionic', 'starter.controllers','firebase'])
 
-.run(function($ionicPlatform) {
+.run(function($ionicPlatform,$state) {
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
@@ -20,19 +20,22 @@ angular.module('starter', ['ionic', 'starter.controllers','firebase'])
       StatusBar.styleDefault();
     }
 
-/*
+
      firebase.auth().onAuthStateChanged(function(user) {
       console.log("STATE CHANGED",user)
           if (user) {
             // User is signed in.
-            var displayName = user.displayName;
+           /* var displayName = user.displayName;
             var email = user.email;
             var emailVerified = user.emailVerified;
             var photoURL = user.photoURL;
             var uid = user.uid;
-            var providerData = user.providerData;
+            var providerData = user.providerData;*/
           }
-        });*/
+          else{
+            $state.go("app.login")
+          }
+        });
 
 
 
@@ -59,7 +62,7 @@ angular.module('starter', ['ionic', 'starter.controllers','firebase'])
   })
   .state('app.login', {
     url: '/login',
-    1 cache: false,
+    cache: false,
     views: {
       'menuContent': {
         templateUrl: 'templates/login.html',
@@ -69,7 +72,7 @@ angular.module('starter', ['ionic', 'starter.controllers','firebase'])
   })
 
   .state('app.home', {
-      url: '/browse',
+      url: '/home',
       views: {
         'menuContent': {
           templateUrl: 'templates/home.html',
@@ -77,12 +80,12 @@ angular.module('starter', ['ionic', 'starter.controllers','firebase'])
         }
       }
     })
-    .state('app.playlists', {
-      url: '/playlists',
+    .state('app.parking', {
+      url: '/parking',
       views: {
         'menuContent': {
-          templateUrl: 'templates/playlists.html',
-          controller: 'PlaylistsCtrl'
+          templateUrl: 'templates/parking.html',
+          controller: 'ParkingCtrl'
         }
       }
     })

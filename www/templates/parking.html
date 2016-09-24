@@ -1,0 +1,23 @@
+  <ion-view view-title="Parking Area" >
+    <ion-content class='has-header has-subheader'>
+
+
+
+        <div class="row responsive-md" >
+            <div class="col" ng-repeat="(slotId,details) in parkingObjs">
+
+                 <div class="time-slot parkingContainer">
+                  {{slotId | uppercase}}
+              <input type="checkbox" id="{{slotId}}" ng-model="details.booked" ng-disabled="details.booked">
+              <label for="{{slotId}}">
+              <span ng-if="details.booked">Booked</span>
+              <span ng-if="!details.booked">Available</span>
+              </label>
+            </div>
+            </div>
+
+        </div>
+
+        <button ng-click="reset()">RESET </button>
+    </ion-content>
+</ion-view>

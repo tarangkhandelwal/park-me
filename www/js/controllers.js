@@ -7,8 +7,8 @@ angular.module('starter.controllers', [])
     firebase.auth().signOut().then(function() {
       // Sign-out successful.
 
-      $scope.syncObject.$destroy();
-     $state.go("app.login");
+     $scope.syncObject.$destroy();
+     //$state.go("app.login");
 
     }, function(error) {
       // An error happened.
@@ -16,11 +16,11 @@ angular.module('starter.controllers', [])
 
   }
 
+    //firebaseUi configuration
     $rootScope.uiConfig = {
-        'signInSuccessUrl': '#/app/playlists',
+        'signInSuccessUrl': '#/app/home',
         'signInFlow': 'popup',
         'signInOptions': [
-          // Leave the lines as is for the providers you want to offer your users.
           firebase.auth.GoogleAuthProvider.PROVIDER_ID,
         ]
       };
@@ -30,21 +30,50 @@ angular.module('starter.controllers', [])
       console.log("Scope ui",$scope.ui)
 })
 
-.controller('PlaylistsCtrl', function($scope, $firebaseObject,$rootScope) {
+.controller('PlaylistsCtrl', function($scope,$rootScope) {
 
-var ref = firebase.database().ref().child("data");
+
+})
+
+.controller('ParkingCtrl', function($scope, $rootScope,$stateParams,$firebaseObject) {
+  var ref = firebase.database().ref();
+  var slotRef= ref.child("slots")
   // download the data into a local object
 
   // putting a console.log here won't work, see below
-    $rootScope.syncObject = $firebaseObject(ref);
+    $rootScope.syncObject = $firebaseObject(slotRef);
   // synchronize the object with a three-way data binding
   // click on `index.html` above to see it used in the DOM!
-  $rootScope.syncObject.$bindTo($scope, "data");
-})
+    $rootScope.syncObject.$bindTo($scope, "parkingObjs");
+/*
+    ref.once("value", function(snapshot) {
+  var a = snapshot.child("rooms").exists();
+  console.log(a,"EXISTS")
+});
+*/
 
-.controller('PlaylistCtrl', function($scope, $stateParams) {
+
+   var parkingObjs = {
+  "p1":{
+    type: "car",
+    booked: false
+  },
+  "p2":{
+    type: "car",
+    booked: false
+  },
+  "p3":{
+    type: "car",
+    booked: false
+  }
+  };
 
 
+
+
+  $scope.reset = function(){
+    firebase.database().ref('slots').set(parkingObjs);
+  }
 })
 
 .controller('HomeCtrl', function($scope, $stateParams) {
@@ -53,7 +82,6 @@ var ref = firebase.database().ref().child("data");
 })
 
 .controller('LoginCtrl', function($scope, $stateParams,$rootScope) {
-  console.log("LOGIN")
          // FirebaseUI config.
 
       // The start method will wait until the DOM is loaded.
