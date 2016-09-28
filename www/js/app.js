@@ -51,15 +51,6 @@ angular.module('starter', ['ionic', 'starter.controllers','firebase'])
     templateUrl: 'templates/menu.html',
     controller: 'AppCtrl'
   })
-
-  .state('app.search', {
-    url: '/search',
-    views: {
-      'menuContent': {
-        templateUrl: 'templates/search.html'
-      }
-    }
-  })
   .state('app.login', {
     url: '/login',
     cache: false,
@@ -88,17 +79,7 @@ angular.module('starter', ['ionic', 'starter.controllers','firebase'])
           controller: 'ParkingCtrl'
         }
       }
-    })
-
-  .state('app.single', {
-    url: '/playlists/:playlistId',
-    views: {
-      'menuContent': {
-        templateUrl: 'templates/playlist.html',
-        controller: 'PlaylistCtrl'
-      }
-    }
-  });
+    });
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/app/home');
 });
