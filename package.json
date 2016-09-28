@@ -2,6 +2,12 @@
   "name": "park-me",
   "version": "1.1.1",
   "description": "park-me: An Ionic project",
+	"license": "UNLICENSED",
+	"readme": "README.md",
+	"repository": {
+    "type": "git",
+    "url": "ssh://git@github.com:tarangkhandelwal/park-me.git"
+  },
   "dependencies": {
     "gulp": "^3.5.6",
     "gulp-sass": "^2.0.4",
