@@ -2,9 +2,9 @@
   "name": "park-me",
   "version": "1.1.1",
   "description": "park-me: An Ionic project",
-	"license": "UNLICENSED",
-	"readme": "README.md",
-	"repository": {
+  "license": "UNLICENSED",
+  "readme": "README.md",
+  "repository": {
     "type": "git",
     "url": "ssh://git@github.com:tarangkhandelwal/park-me.git"
   },
@@ -26,7 +26,8 @@
     "cordova-plugin-whitelist",
     "cordova-plugin-splashscreen",
     "cordova-plugin-statusbar",
-    "ionic-plugin-keyboard"
+    "ionic-plugin-keyboard",
+    "cordova-plugin-inappbrowser"
   ],
   "cordovaPlatforms": []
 }

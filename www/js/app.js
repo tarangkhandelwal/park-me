@@ -4,9 +4,15 @@
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
 // 'starter.controllers' is found in controllers.js
-angular.module('starter', ['ionic', 'starter.controllers','firebase'])
+angular.module('starter', ['ionic', 'starter.controllers','firebase', 'auth0.auth0', 'angular-jwt'])
 
-.run(function($ionicPlatform,$state) {
+.run(function($ionicPlatform,$state,$rootScope, authService) {
+   // Process the auth token if it exists and fetch the profile
+    authService.authenticateAndGetProfile();
+
+    // Check is the user authenticated before Ionic platform is ready
+    authService.checkAuthOnRefresh();
+
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
@@ -21,28 +27,14 @@ angular.module('starter', ['ionic', 'starter.controllers','firebase'])
     }
 
 
-     firebase.auth().onAuthStateChanged(function(user) {
-      console.log("STATE CHANGED",user)
-          if (user) {
-            // User is signed in.
-           /* var displayName = user.displayName;
-            var email = user.email;
-            var emailVerified = user.emailVerified;
-            var photoURL = user.photoURL;
-            var uid = user.uid;
-            var providerData = user.providerData;*/
-          }
-          else{
-            $state.go("app.login")
-          }
-        });
-
-
+    authService.checkAuthOnRefresh();
 
   });
+
+
 })
 
-.config(function($stateProvider, $urlRouterProvider) {
+.config(function($stateProvider, $urlRouterProvider,angularAuth0Provider) {
   $stateProvider
 
     .state('app', {
@@ -81,5 +73,17 @@ angular.module('starter', ['ionic', 'starter.controllers','firebase'])
       }
     });
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/app/home');
+  $urlRouterProvider.otherwise('/app/login');
+
+
+  // Initialization for the angular-auth0 library
+    angularAuth0Provider.init({
+      clientID: "V7SOAACmYnLy2EEj1D2BIPpi6i6myE6A",
+      domain: "tarang.auth0.com",
+      callbackURL: "#/app/home",
+
+    });
+
+
+
 });
