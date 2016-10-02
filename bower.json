@@ -1,14 +1,17 @@
 {
   "name": "park-me",
   "private": "true",
-	"dependencies": {
-		"ngCordova": "~0.1.20-alpha",
-		"ionic": "~1.1.0",
-		"ionic-service-core": "~0.1.10",
-		"ionic-service-push": "~0.1.13"
-	},
+  "dependencies": {
+    "ngCordova": "~0.1.20-alpha",
+    "ionic": "~1.1.0",
+    "ionic-service-core": "~0.1.10",
+    "ionic-service-push": "~0.1.13",
+    "auth0.js": "^7.2.1",
+    "angular-auth0": "^1.0.4",
+    "angular-jwt": "^0.1.3"
+  },
   "devDependencies": {
-		"platform": "~1.3.1",
+    "platform": "~1.3.1",
     "ionic": "driftyco/ionic-bower#1.3.1"
   }
 }
